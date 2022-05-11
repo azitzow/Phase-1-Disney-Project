@@ -99,3 +99,59 @@ window.addEventListener("DOMContentLoaded", async () => {
     })
     .catch((err) => console.log("Error: ", err));
 });
+
+// ////////////////////////
+
+function renderBlowup(image, character) {
+    const blowup = document.querySelector('div#blowup');
+
+    // remove current blowup detail
+    blowup.innerHTML = "";
+
+    // insert new blowup detail
+    blowup.className = 'blowup';
+    blowup.innerHTML = `
+        <img src="${image.src}">
+        <div class="content">
+            ${mkBlowupContent(character)}
+        </div>
+`;
+
+    styleElements(blowup, image);
+}
+
+function mkBlowupContent(character) {
+    let contentHtml = `<h1>${character.name}</h1>`
+
+    // merge contents of the character's films and shortFilms arrays; sort by alpha
+    const films = [ ...character.films, ...character.shortFilms ].sort();
+
+    // add html of film info and TV info to the html blob
+    contentHtml += mkCreditsBlock(films, contentHtml, 'Film Credits:')
+                 + mkCreditsBlock(character.tvShows, contentHtml, 'TV Credits:');
+
+    return contentHtml;
+}
+
+// lay out the text credits (where medium is array of film or tv credits)
+function mkCreditsBlock(medium, contentHtml, creditHeading) {
+    let creditsBlock = "";
+    if (medium.length > 0) {
+        creditsBlock = `
+            <h3>${creditHeading}</h3>
+            ${mkCreditsString(medium, 'p')}
+`
+    }
+    return creditsBlock;
+}
+
+// wrap each film/tvShow credit/name with an html tag
+// If the API included annotation of "page does not exist" for a show, remove it
+function mkCreditsString(credits, tag) {
+    const re = / \(page does not exist\)/;
+    return credits.map(credit =>
+        '<'+tag+'>'
+        + credit.replace(re, '')
+        + '</'+tag+'>'
+    ).join('');
+}
