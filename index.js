@@ -100,8 +100,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     .catch((err) => console.log("Error: ", err));
 });
 
-// ////////////////////////
-
 function renderBlowup(image, character) {
     const blowup = document.querySelector('div#blowup');
 
