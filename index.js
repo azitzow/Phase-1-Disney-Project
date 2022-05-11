@@ -27,8 +27,7 @@ const eventListeners = (image, character) => {
     image.style.height = "180px";
     image.style.width = "180px";
   });
-  
-    image.addEventListener('click', () => renderBlowup(image, character))
+  image.addEventListener('click', () => renderBlowup(image, character))
 };
 
 const renderChar = (character) => {
@@ -100,4 +99,3 @@ window.addEventListener("DOMContentLoaded", async () => {
     })
     .catch((err) => console.log("Error: ", err));
 });
-
