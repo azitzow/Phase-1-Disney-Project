@@ -4,6 +4,7 @@ const searchInput = document.getElementById("search");
 const submitBtn = document.getElementById("submitBtn");
 const frame = document.createElement("div");
 let fullList = [];
+let allDisneyCharacters = [];
 
 const styleElements = (frame, image) => {
   frame.style.display = "inline-block";
@@ -26,6 +27,7 @@ const eventListeners = (image, character) => {
     image.style.height = "180px";
     image.style.width = "180px";
   });
+  image.addEventListener('click', () => renderBlowup(image, character))
 };
 
 const renderChar = (character) => {
