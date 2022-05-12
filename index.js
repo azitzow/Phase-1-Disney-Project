@@ -87,7 +87,19 @@ const initialStyles = () => {
     image.style.marginTop = "0.6%";
   };
 
-// render character image and info on left side
+window.addEventListener("DOMContentLoaded", async () => {
+  initialStyles();
+  await fetch("https://api.disneyapi.dev/characters")
+    .then((res) => {
+      return res.json();
+    })
+    .then((disneyChars) => {
+      fullList = disneyChars.data;
+      filterCharacters(disneyChars.data);
+    })
+    .catch((err) => console.log("Error: ", err));
+});
+
 function renderBlowup(image, character) {
   const blowup = document.querySelector('div#blowup');
   // remove current blowup detail
