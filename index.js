@@ -13,6 +13,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       allDisneyCharacters = disneyChars.data;
       renderCharacters(allDisneyCharacters);
       searchInput.addEventListener("input", filterCharacters);
+      renderBlowup({ src: disneyChars.data[0].imageUrl }, disneyChars.data[0]);
     })
     .catch((err) => console.log("Error: ", err));
 });
@@ -25,7 +26,6 @@ const renderCharacters = (characters) => {
 const renderChar = (character) => {
   const image = document.createElement("img");
   image.src = character.imageUrl;
-
   image.addEventListener("mouseenter", () => {
     image.style.height = "220px";
     image.style.width = "220px";
@@ -34,11 +34,9 @@ const renderChar = (character) => {
     image.style.height = "180px";
     image.style.width = "180px";
   });
-
   image.addEventListener("click", () => {
     renderBlowup(image, character);
   });
-  
   frame.append(image);
   list.append(frame);
   styleElements(frame, image);
@@ -51,7 +49,6 @@ const filterCharacters = (e) => {
       ? true
       : character.name.toLowerCase().includes(value);
   });
-
   while (frame.firstChild) {
     frame.removeChild(frame.firstChild);
   }
@@ -96,42 +93,24 @@ const mainImageStyles = () => {
   return "width: 350px; height: 350px; border-radius: 5%;";
 };
 
-window.addEventListener("DOMContentLoaded", async () => {
-  initialStyles();
-  await fetch("https://api.disneyapi.dev/characters")
-    .then((res) => {
-      return res.json();
-    })
-    .then((disneyChars) => {
-      renderBlowup({ src: disneyChars.data[0].imageUrl }, disneyChars.data[0]);
-      filterCharacters(disneyChars.data);
-    })
-    .catch((err) => console.log("Error: ", err));
-});
-
-  function renderBlowup(image, character) {
+function renderBlowup(image, character) {
   const blowup = document.querySelector("div#blowup");
   // remove current blowup detail
   blowup.innerHTML = "";
-
   // insert new blowup detail
-  blowup.className = "blowup";
   blowup.innerHTML = `
       <img id='mainImage' style='${mainImageStyles()}' src="${image.src}">
       <div class="content">
           ${mkBlowupContent(character)}
       </div>
 `;
-
   styleElements(blowup, image);
 }
 
 function mkBlowupContent(character) {
   let contentHtml = `<h1 style="margin-top: 10px;">${character.name}</h1>`;
-
   // merge contents of the character's films and shortFilms arrays; sort by alpha
   const films = [...character.films, ...character.shortFilms].sort();
-
   // add html of film info and TV info to the html blob
   contentHtml +=
     mkCreditsBlock(films, contentHtml, "Film Credits:") +
