@@ -34,10 +34,11 @@ const renderChar = (character) => {
     image.style.height = "180px";
     image.style.width = "180px";
   });
+
   image.addEventListener("click", () => {
     renderBlowup(image, character);
   });
-
+  
   frame.append(image);
   list.append(frame);
   styleElements(frame, image);
@@ -108,7 +109,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     .catch((err) => console.log("Error: ", err));
 });
 
-function renderBlowup(image, character) {
+  function renderBlowup(image, character) {
   const blowup = document.querySelector("div#blowup");
   // remove current blowup detail
   blowup.innerHTML = "";
@@ -135,7 +136,6 @@ function mkBlowupContent(character) {
   contentHtml +=
     mkCreditsBlock(films, contentHtml, "Film Credits:") +
     mkCreditsBlock(character.tvShows, contentHtml, "TV Credits:");
-
   return contentHtml;
 }
 
