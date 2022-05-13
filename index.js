@@ -37,6 +37,7 @@ const renderChar = (character) => {
   image.addEventListener("click", () => {
     renderBlowup(image, character);
   });
+
   frame.append(image);
   list.append(frame);
   styleElements(frame, image);

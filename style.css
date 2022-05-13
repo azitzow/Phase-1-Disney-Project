@@ -19,7 +19,9 @@ h1 {
   font-size: 65px;
   color: #0CCAC4;
   font-family: 'Bigelow Rules';
+
   background: linear-gradient(to right, #EF5350, #F48FB1, #7E57C2, #2196F3, #26C6DA, #43A047, #EEFF41, #F9A825, #FF5722);
+
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
