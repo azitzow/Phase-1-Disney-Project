@@ -13,6 +13,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       allDisneyCharacters = disneyChars.data;
       renderCharacters(allDisneyCharacters);
       searchInput.addEventListener("input", filterCharacters);
+      renderBlowup({ src: disneyChars.data[0].imageUrl }, disneyChars.data[0]);
     })
     .catch((err) => console.log("Error: ", err));
 });
@@ -38,7 +39,7 @@ const renderChar = (character) => {
   image.addEventListener("click", () => {
     renderBlowup(image, character);
   });
-  
+
   frame.append(image);
   list.append(frame);
   styleElements(frame, image);
@@ -96,26 +97,12 @@ const mainImageStyles = () => {
   return "width: 350px; height: 350px; border-radius: 5%;";
 };
 
-window.addEventListener("DOMContentLoaded", async () => {
-  initialStyles();
-  await fetch("https://api.disneyapi.dev/characters")
-    .then((res) => {
-      return res.json();
-    })
-    .then((disneyChars) => {
-      renderBlowup({ src: disneyChars.data[0].imageUrl }, disneyChars.data[0]);
-      filterCharacters(disneyChars.data);
-    })
-    .catch((err) => console.log("Error: ", err));
-});
-
-  function renderBlowup(image, character) {
+function renderBlowup(image, character) {
   const blowup = document.querySelector("div#blowup");
   // remove current blowup detail
   blowup.innerHTML = "";
 
   // insert new blowup detail
-  blowup.className = "blowup";
   blowup.innerHTML = `
       <img id='mainImage' style='${mainImageStyles()}' src="${image.src}">
       <div class="content">
