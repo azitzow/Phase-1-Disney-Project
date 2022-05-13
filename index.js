@@ -26,14 +26,17 @@ const renderCharacters = (characters) => {
 const renderChar = (character) => {
   const image = document.createElement("img");
   image.src = character.imageUrl;
+  
   image.addEventListener("mouseenter", () => {
     image.style.height = "220px";
     image.style.width = "220px";
   });
+  
   image.addEventListener("mouseleave", () => {
     image.style.height = "180px";
     image.style.width = "180px";
   });
+  
   image.addEventListener("click", () => {
     renderBlowup(image, character);
   });
