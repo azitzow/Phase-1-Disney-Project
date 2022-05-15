@@ -5,7 +5,6 @@ body {
     rgba(0, 128, 128, 1) 100%
   );
 }
-
 #searchFrame {
   border: none;
   outline: none;
@@ -14,19 +13,19 @@ body {
   line-height: 30px;
   margin-bottom: 30px;
 }
-
 h1 {
   margin-top: 75px;
   margin-bottom: 50px;
   font-size: 65px;
-  color: #0ccac4;
+  color: #0CCAC4;
   font-family: 'Bigelow Rules';
-  background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+
+  background: linear-gradient(to right, #EF5350, #F48FB1, #7E57C2, #2196F3, #26C6DA, #43A047, #EEFF41, #F9A825, #FF5722);
+
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 .search-bar {
   font-size: 30px;
   color: white;
@@ -44,7 +43,7 @@ h1 {
     overflow: hidden;
 }
 
-.circles li{
+.circles li {
     position: absolute;
     display: block;
     list-style: none;
@@ -61,7 +60,6 @@ h1 {
     height: 80px;
     animation-delay: 0s;
 }
-
 
 .circles li:nth-child(2){
     left: 10%;
@@ -131,8 +129,6 @@ h1 {
     animation-duration: 11s;
 }
 
-@keyframes animate {
-
     0%{
         transform: translateY(0) rotate(0deg);
         opacity: 1;
@@ -144,5 +140,3 @@ h1 {
         opacity: 0;
         border-radius: 50%;
     }
-
-}

@@ -26,16 +26,17 @@ const renderCharacters = (characters) => {
 const renderChar = (character) => {
   const image = document.createElement("img");
   image.src = character.imageUrl;
-
+  
   image.addEventListener("mouseenter", () => {
     image.style.height = "220px";
     image.style.width = "220px";
   });
+  
   image.addEventListener("mouseleave", () => {
     image.style.height = "180px";
     image.style.width = "180px";
   });
-
+  
   image.addEventListener("click", () => {
     renderBlowup(image, character);
   });
@@ -52,7 +53,6 @@ const filterCharacters = (e) => {
       ? true
       : character.name.toLowerCase().includes(value);
   });
-
   while (frame.firstChild) {
     frame.removeChild(frame.firstChild);
   }
@@ -101,7 +101,6 @@ function renderBlowup(image, character) {
   const blowup = document.querySelector("div#blowup");
   // remove current blowup detail
   blowup.innerHTML = "";
-
   // insert new blowup detail
   blowup.innerHTML = `
       <img id='mainImage' style='${mainImageStyles()}' src="${image.src}">
@@ -109,16 +108,13 @@ function renderBlowup(image, character) {
           ${mkBlowupContent(character)}
       </div>
 `;
-
   styleElements(blowup, image);
 }
 
 function mkBlowupContent(character) {
   let contentHtml = `<h1 style="margin-top: 10px;">${character.name}</h1>`;
-
   // merge contents of the character's films and shortFilms arrays; sort by alpha
   const films = [...character.films, ...character.shortFilms].sort();
-
   // add html of film info and TV info to the html blob
   contentHtml +=
     mkCreditsBlock(films, contentHtml, "Film Credits:") +
